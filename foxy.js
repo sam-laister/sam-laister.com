@@ -1,4 +1,4 @@
-// 1-in-1000 chance, every second, of a pirate fox animatronic peeking in
+// 1-in-25 chance, every second, of a pirate fox animatronic peeking in
 // from the edge of the screen. An original pixel-art homage (not the real
 // FNAF sprite), drawn in code. Add #foxy to the URL to trigger it on purpose.
 (function () {
@@ -98,5 +98,5 @@
 
   if (location.hash === '#foxy') setTimeout(peek, 1200);
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  setInterval(() => { if (!document.hidden && Math.random() < 1 / 1000) peek(); }, 1000);
+  setInterval(() => { if (!document.hidden && Math.random() < 1 / 25) peek(); }, 1000);
 })();
