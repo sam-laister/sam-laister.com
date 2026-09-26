@@ -43,6 +43,7 @@
   <div class="nav-title">~*~ MENU ~*~</div>
   <a class="nav-btn" href="#welcome">🏠 HOME</a>
   <a class="nav-btn" href="#deals">💰 HOT DEALS</a>
+  <a class="nav-btn" href="#press">📰 IN THE PRESS</a>
   <a class="nav-btn" href="#stock">🚗 STOCK LIST</a>
   <a class="nav-btn" href="#projects">💾 PROJECTS</a>
   <a class="nav-btn" href="#photos">📸 PHOTOS!!</a>
@@ -119,6 +120,21 @@
       </div>
     </div>
     <p class="tiny center">*Sam is not a car. Sam cannot be leased. Sam does not come with alloys. Representative APR: vibes. Offer ends when Sam finishes his coffee.</p>
+  </section>
+
+  <section id="press" class="box press-box">
+    <h2 class="h-flame">📰 AS SEEN IN THE PRESS!!! 📰</h2>
+    <table class="press-table"><tr>
+      <td valign="top"><div class="clipping"><img src="img/sam-rocket.jpeg" alt="Newspaper centre spread headlined 'Sam gives car mart a rocket', with Sam wearing a rocket hat"><span class="press-burst">EXCLUSIVE!!</span></div></td>
+      <td valign="top">
+        <p class="headline">"SAM GIVES CAR MART A ROCKET"</p>
+        <p class="tiny">— <i>Northern Business Daily</i>, monday interview</p>
+        <p>That's right folks, the <b>WHOLE CENTRE PAGES</b>!!! Sam's story was deemed so important it bumped <span class="blink red">EVERYTHING ELSE</span> in the paper.</p>
+        <p>Critics called his rocket hat <b>"aerodynamic"</b> and <b>"a hat"</b>. Photographer's only note: <i>"SMILE??"</i></p>
+        <p class="call">✂ CLICK TO READ THE FULL ARTICLE!!! ✂</p>
+        <p class="tiny">(article may not contain words)</p>
+      </td>
+    </tr></table>
   </section>
 
   <section id="stock" class="box">
@@ -322,7 +338,7 @@ addEventListener('pointermove', e => {
 
 // Lightbox
 const lb = document.getElementById('lightbox');
-document.querySelectorAll('.polaroid img').forEach(img => img.addEventListener('click', () => {
+document.querySelectorAll('.polaroid img, .clipping img').forEach(img => img.addEventListener('click', () => {
   lb.querySelector('img').src = img.src; lb.classList.add('on');
 }));
 lb.addEventListener('click', () => lb.classList.remove('on'));

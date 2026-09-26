@@ -112,6 +112,13 @@ h2 { margin: 0 0 12px; text-align: center; font: 900 26px/1.1 Impact, "Arial Bla
 .photo-frame { position: relative; width: 210px; border: 10px solid #fff; outline: 4px dashed #ff00cc; box-shadow: 6px 6px 0 #00ccff; }
 .tilt-l { transform: rotate(-4deg); margin: 10px 8px 20px; }
 .stamp { position: absolute; bottom: -12px; right: -18px; background: #f00; color: #fff; font: 900 14px Impact; padding: 4px 8px; transform: rotate(-12deg); border: 2px solid #fff; }
+.press-box { background: #fdf6e3; border-color: #000; }
+.press-table td { padding: 0 8px; }
+.clipping { position: relative; width: 300px; margin: 10px 14px 18px 6px; background: #fff; padding: 6px; transform: rotate(2.5deg); box-shadow: 6px 6px 0 #ff00cc; cursor: zoom-in; }
+.clipping img { display: block; border: 1px solid #999; }
+.clipping:hover { transform: rotate(0) scale(1.03); }
+.press-burst { position: absolute; top: -14px; left: -16px; background: #ffef00; color: #f00; font: 900 15px Impact, sans-serif; padding: 6px 10px; transform: rotate(-14deg); border: 3px solid #f00; }
+.headline { font: 900 26px/1.1 Impact, "Arial Black", sans-serif; margin: 6px 0 2px; }
 .big { font-size: 20px; }
 .hl { background: #ffff00; color: #f00; font-weight: bold; padding: 0 3px; }
 .hl2 { background: #00ffff; color: #000080; font-weight: bold; padding: 0 3px; }
@@ -216,4 +223,6 @@ h2 { margin: 0 0 12px; text-align: center; font: 900 26px/1.1 Impact, "Arial Bla
   .deals { grid-template-columns: 1fr; }
   .gallery { grid-template-columns: 1fr 1fr; }
   .welcome-table, .welcome-table tbody, .welcome-table tr, .welcome-table td { display: block; }
+  .press-table, .press-table tbody, .press-table tr, .press-table td { display: block; }
+  .clipping { width: auto; max-width: 320px; margin: 10px auto 18px; }
 }
