@@ -211,6 +211,36 @@ h2 { margin: 0 0 12px; text-align: center; font: 900 26px/1.1 Impact, "Arial Bla
 /* foxy peeking in from off screen (foxy.js) */
 .foxy { position: fixed; z-index: 1000; width: min(240px, 45vw); image-rendering: pixelated; cursor: pointer; filter: drop-shadow(0 0 12px rgba(255,0,0,.6)); }
 
+/* origami crane transition (crane.js) */
+.crane-stage { position: fixed; inset: 0; z-index: 900; perspective: 1600px; overflow: hidden; pointer-events: none; }
+.crane-world { position: absolute; inset: 0; transform-style: preserve-3d; }
+.crane-tri { position: absolute; left: 0; top: 0; transform-origin: 0 0; transform-style: preserve-3d; }
+.crane-face { position: absolute; inset: 0; overflow: hidden; backface-visibility: hidden; background: #fff; }
+.crane-back { transform: rotateY(180deg); background: #f7f1e3 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Ctext x='8' y='26' font-size='14' opacity='.12'%3E★%3C/text%3E%3C/svg%3E"); }
+.crane-shade { position: absolute; inset: 0; background: #000; opacity: 0; pointer-events: none; }
+
+/* the Windows XP-ish boot screen the crane crashes into */
+.xp-boot { position: fixed; inset: 0; z-index: 850; background: #000; color: #fff; display: grid; place-content: center; justify-items: center; gap: 70px; opacity: 0; transition: opacity .7s; font-family: "Franklin Gothic Medium", "Trebuchet MS", Arial, sans-serif; }
+.xp-boot.on { opacity: 1; }
+.xp-logo { display: flex; align-items: center; gap: 10px; }
+.xp-flag { width: 92px; }
+.xp-word { display: grid; line-height: 1; }
+.xp-word small { font-size: 15px; font-weight: bold; margin-left: 4px; }
+.xp-word b { font-size: 58px; font-weight: bold; letter-spacing: -1px; }
+.xp-word i { font-size: 26px; color: #f60; font-style: italic; vertical-align: super; margin-left: 2px; }
+.xp-word em { font-size: 17px; font-style: normal; text-align: right; margin-top: 2px; }
+.xp-word sup, .xp-brand sup { font-size: .5em; }
+.xp-bar { width: 150px; height: 18px; border: 2px solid #b2b2b2; border-radius: 4px; padding: 2px; overflow: hidden; }
+.xp-bar span { display: block; width: 8px; height: 100%; border-radius: 1px; background: linear-gradient(#9cc0ff, #2459d8 50%, #3f7bff); box-shadow: 10px 0 0 #2f66e6, 20px 0 0 #2f66e6; animation: xp-load 1.9s linear infinite; }
+@keyframes xp-load { from { transform: translateX(-32px); } to { transform: translateX(150px); } }
+.xp-copy { position: absolute; left: 24px; bottom: 16px; margin: 0; font: 13px Arial, sans-serif; }
+.xp-brand { position: absolute; right: 24px; bottom: 12px; margin: 0; font: italic bold 24px "Franklin Gothic Medium", Arial, sans-serif; }
+.xp-boot.hit { animation: xp-shake .45s cubic-bezier(.3,.7,.4,1); }
+@keyframes xp-shake { 0% { transform: scale(1.03); filter: brightness(2.5); } 20% { transform: translate(-14px, 9px); } 40% { transform: translate(11px, -8px); } 60% { transform: translate(-6px, 5px); } 80% { transform: translate(3px, -2px); } 100% { transform: none; filter: none; } }
+.xp-cracks { position: absolute; inset: 0; width: 100%; height: 100%; fill: none; stroke-linejoin: round; }
+.xp-cracks g { stroke: rgba(255,255,255,.85); stroke-width: 1.6; }
+.xp-cracks .shadow { stroke: rgba(0,0,0,.6); stroke-width: 4; }
+
 /* cursor sparkle trail */
 .sparkle { position: fixed; pointer-events: none; z-index: 99; font-size: 14px; animation: sparkle .8s linear forwards; }
 @keyframes sparkle { to { transform: translateY(24px) scale(.2); opacity: 0; } }
