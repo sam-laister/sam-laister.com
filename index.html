@@ -4,10 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>*** SAM LAISTER .COM *** BRISTOL'S No.1 SOFTWARE ENGINEER *** BEST DEALS ON CODE!!! ***</title>
-<meta name="description" content="Sam Laister: Sheffield Uni graduate, software engineer, co-founder of Everbit Software. Best viewed in Netscape Navigator 4.">
+<meta name="description" content="Sam Laister: Sheffield Uni graduate, software engineer. Best viewed in Netscape Navigator 4.">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<canvas id="pipes" aria-hidden="true"></canvas>
 
 <!-- fake popup, 1999 style -->
 <div class="popup" id="popup">
@@ -23,7 +24,7 @@
 
 <table class="shell" cellspacing="0" cellpadding="0" align="center">
 <tr><td colspan="3" class="top-strip">
-  <marquee scrollamount="9" class="m-top">★ WELCOME TO SAM LAISTER .COM ★ THE INTERNET'S MOST TRUSTED SAM ★ NOW WITH 100% MORE GO ★ BRISTOL / LONDON / THE INFORMATION SUPERHIGHWAY ★ SHEFFIELD UNI GRADUATE 2025!!! ★ CO-FOUNDER OF EVERBIT SOFTWARE ★ BUG-FREE CODE* ★ (*NOT A LEGALLY BINDING STATEMENT) ★</marquee>
+  <marquee scrollamount="9" class="m-top">★ WELCOME TO SAM LAISTER .COM ★ THE INTERNET'S MOST TRUSTED SAM ★ NOW WITH 100% MORE GO ★ BRISTOL / LONDON / THE INFORMATION SUPERHIGHWAY ★ SHEFFIELD UNI GRADUATE 2025!!! ★ BUG-FREE CODE* ★ (*NOT A LEGALLY BINDING STATEMENT) ★</marquee>
 </td></tr>
 
 <tr><td colspan="3" class="banner">
@@ -84,7 +85,6 @@
         <p class="big">HELLO and <span class="blink">WELCOME</span> to the <b>OFFICIAL</b> homepage of <span class="hl">SAM LAISTER</span>!!!</p>
         <p>Sam is a <b>Software Engineer</b> and <b>Fullstack Developer</b>. He graduated from <b>THE UNIVERSITY OF SHEFFIELD</b> in 2025 with a degree in <b>COMPUTER SCIENCE</b>, then took the jump and moved to <b>BRISTOL</b>. He says Bristol has been <i>"everything I hoped and more"</i>!!</p>
         <p>By day he ships <b>production</b> code at <span class="hl2">WREN KITCHENS</span> with <b>PHP, TypeScript, Symfony, Flutter &amp; React Native</b>. By night he writes <b class="green">Go</b>, <b class="purple">Kotlin</b> &amp; <b class="red">Ruby</b> <i>for FUN</i> (yes, really).</p>
-        <p>He also <b>co-founded</b> <a href="https://everbit.dev" target="_blank" rel="noopener">EVERBIT SOFTWARE</a>!!! 🚀</p>
         <p class="call">☎ DON'T DELAY — <a href="https://www.linkedin.com/in/sam-laister/" target="_blank" rel="noopener">CONNECT ON LINKEDIN TODAY!!!</a> ☎</p>
       </td>
     </tr></table>
@@ -112,10 +112,10 @@
       </div>
       <div class="deal d3">
         <div class="deal-tag">LTD<br>EDITION</div>
-        <h3>THE FOUNDER</h3>
-        <p>Co-founded Everbit Software<br>Project manager too!!</p>
+        <h3>THE TINKERER</h3>
+        <p>Side projects at 2am<br>Photos → 3D models!!</p>
         <div class="price">1<small> of 1</small></div>
-        <p class="spec">Shipping real products · Leading projects</p>
+        <p class="spec">Photogrammetry · Self-hosting · Neovim</p>
       </div>
     </div>
     <p class="tiny center">*Sam is not a car. Sam cannot be leased. Sam does not come with alloys. Representative APR: vibes. Offer ends when Sam finishes his coffee.</p>
@@ -232,6 +232,12 @@
     <b class="rainbow">3D SAM!!!</b>
   </div>
 
+  <div class="widget dino-w">
+    <b>🦖 DINO.EXE 🦖</b>
+    <canvas id="dino" class="dino-view" aria-label="A spinning low-poly 3D dinosaur"></canvas>
+    <small>REAL-TIME 3D!!! <span id="dino-polys">252</span> POLYGONS!!!<br>(no 3D accelerator required)</small>
+  </div>
+
   <div class="widget" id="links">
     <b>★ COOL LINKS ★</b>
     <a class="badge b-li" href="https://www.linkedin.com/in/sam-laister/" target="_blank" rel="noopener">LinkedIn</a>
@@ -239,7 +245,6 @@
     <a class="badge b-ig" href="https://www.instagram.com/soup.sp4m/" target="_blank" rel="noopener">Instagram</a>
     <a class="badge b-x" href="https://x.com/sam_laister" target="_blank" rel="noopener">X / Twitter</a>
     <a class="badge b-web" href="https://www.sam-laister.com/" target="_blank" rel="noopener">sam-laister.com</a>
-    <a class="badge b-eb" href="https://everbit.dev" target="_blank" rel="noopener">EVERBIT</a>
   </div>
 
   <div class="widget poll">
@@ -277,6 +282,8 @@
 </table>
 
 <div id="lightbox" class="lightbox"><img alt=""></div>
+<script src="pipes.js"></script>
+<script src="dino.js"></script>
 <script>
 // Popup: show once per visit, a couple of seconds in
 const popup = document.getElementById('popup');

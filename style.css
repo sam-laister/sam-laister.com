@@ -3,13 +3,13 @@
 html { scroll-behavior: smooth; }
 body {
   margin: 0; padding: 12px 8px 40px;
-  background: #ffef00 url(img/tile.png) repeat;
-  animation: bgscroll 20s linear infinite;
+  background: #000;
   font: 15px/1.45 "Comic Sans MS", "Comic Sans", "Chalkboard SE", cursive;
   color: #000;
   cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Ctext y='24' font-size='24'%3E👆%3C/text%3E%3C/svg%3E") 8 2, auto;
 }
-@keyframes bgscroll { to { background-position: 160px 160px; } }
+/* 3D Pipes screensaver background (pipes.js) */
+#pipes { position: fixed; inset: 0; width: 100%; height: 100%; z-index: -1; image-rendering: pixelated; }
 a { color: #0000ee; font-weight: bold; }
 a:visited { color: #551a8b; }
 a:hover { color: #ff0000; background: #ffff00; }
@@ -17,7 +17,7 @@ img { max-width: 100%; }
 
 .shell {
   width: 100%; max-width: 1180px; background: #fff;
-  border: 6px ridge #ff00cc; box-shadow: 10px 10px 0 #000;
+  border: 6px ridge #ff00cc; box-shadow: 10px 10px 0 #00e5ff;
 }
 .shell td { vertical-align: top; }
 
@@ -85,12 +85,14 @@ img { max-width: 100%; }
 .counter span { background: #000; color: #f33; font: bold 20px "Courier New", monospace; padding: 2px 4px; border: 1px solid #555; }
 .spinner img { width: 110px; animation: spin3d 3s linear infinite; }
 @keyframes spin3d { to { transform: rotateY(360deg); } }
+.dino-w { background: #000; color: #3f6; font-family: "Courier New", monospace; }
+.dino-view { display: block; width: 100%; aspect-ratio: 4 / 3; margin: 6px 0; border: 3px inset #999; image-rendering: pixelated; background: #140028; }
 .badge {
   display: block; margin: 5px auto; width: 150px; padding: 5px 0; font: bold 12px Verdana; text-decoration: none;
   border: 2px outset #ddd; color: #fff !important;
 }
 .b-li { background: #0a66c2; } .b-gh { background: #24292e; } .b-ig { background: linear-gradient(90deg, #f58529, #dd2a7b, #8134af); }
-.b-x { background: #000; } .b-web { background: #008080; } .b-eb { background: #ff00cc; }
+.b-x { background: #000; } .b-web { background: #008080; }
 .badge:hover { transform: scale(1.08) rotate(-2deg); }
 .poll label { display: block; text-align: left; font-size: 12px; }
 .fact p { margin: 4px 0 0; }
