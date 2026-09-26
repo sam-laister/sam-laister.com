@@ -208,6 +208,9 @@ h2 { margin: 0 0 12px; text-align: center; font: 900 26px/1.1 Impact, "Arial Bla
 .bounce { animation: bounce 1s ease-in-out infinite alternate; }
 @keyframes bounce { to { transform: translateY(-8px) rotate(-6deg); } }
 
+/* foxy peeking in from off screen (foxy.js) */
+.foxy { position: fixed; z-index: 1000; width: min(240px, 45vw); image-rendering: pixelated; cursor: pointer; filter: drop-shadow(0 0 12px rgba(255,0,0,.6)); }
+
 /* cursor sparkle trail */
 .sparkle { position: fixed; pointer-events: none; z-index: 99; font-size: 14px; animation: sparkle .8s linear forwards; }
 @keyframes sparkle { to { transform: translateY(24px) scale(.2); opacity: 0; } }
