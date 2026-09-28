@@ -16,11 +16,16 @@ export default function Blog() {
 
   // The prerendered page is unfiltered; apply ?q= / ?category= / ?tag= once in the browser.
   // The search text lives in state (the URL lags behind fast typing) and is mirrored to ?q=.
-  // Our own URL updates are marked with FROM_SEARCH; any other navigation (e.g. the header's
-  // "Blog" link, which doesn't remount this page) re-reads ?q= so the box never goes stale.
+  // The first sync after mount always reads ?q= (Back and reload restore history.state, so the
+  // marker can still be there). After that, skip our own FROM_SEARCH updates, and re-read ?q=
+  // on any other navigation (e.g. the header's "Blog" link, which doesn't remount this page).
   const [q, setQ] = useState('');
+  const synced = useRef(false);
   useEffect(() => {
-    if (hydrated && !(location.state as { fromSearch?: boolean } | null)?.fromSearch) setQ(params.get('q') ?? '');
+    if (!hydrated) return;
+    const fromSearch = (location.state as { fromSearch?: boolean } | null)?.fromSearch;
+    if (!synced.current || !fromSearch) setQ(params.get('q') ?? '');
+    synced.current = true;
   }, [hydrated, location.key]); // eslint-disable-line react-hooks/exhaustive-deps
   const categoryParam = hydrated ? params.get('category') : null;
   const category = isCategory(categoryParam) ? categoryParam : null;
