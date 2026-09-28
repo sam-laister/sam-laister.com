@@ -8,7 +8,7 @@ export default function NotFound() {
       <p className="lede">That page doesn’t exist, or it moved.</p>
       <div className="hero-links">
         <Link to="/" className="button">Home</Link>
-        <Link to="/blog" className="button ghost">Blog</Link>
+        <Link to="/blog/" className="button ghost">Blog</Link>
       </div>
     </div>
   );

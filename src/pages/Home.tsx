@@ -15,7 +15,7 @@ export default function Home() {
         <h1>Hi, I’m Sam.</h1>
         <p className="lede">{profile.intro}</p>
         <div className="hero-links">
-          <Link to="/blog" className="button">Read the blog →</Link>
+          <Link to="/blog/" className="button">Read the blog →</Link>
           {profile.links.map(l => (
             <a key={l.href} href={l.href} target="_blank" rel="noreferrer" className="button ghost">{l.label} ↗</a>
           ))}
@@ -30,7 +30,7 @@ export default function Home() {
       <section aria-labelledby="writing">
         <div className="section-head">
           <h2 id="writing" className="label">Latest writing</h2>
-          {latest.length > 0 && <Link to="/blog" className="more">All posts →</Link>}
+          {latest.length > 0 && <Link to="/blog/" className="more">All posts →</Link>}
         </div>
         {latest.length ? <PostList posts={latest} /> : <p className="muted">First post coming soon.</p>}
       </section>

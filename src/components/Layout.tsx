@@ -29,7 +29,7 @@ export default function Layout() {
           </Link>
           <nav aria-label="Main">
             <NavLink to="/" end>About</NavLink>
-            <NavLink to="/blog">Blog</NavLink>
+            <NavLink to="/blog/">Blog</NavLink>
           </nav>
         </div>
       </header>

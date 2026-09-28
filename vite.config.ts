@@ -10,8 +10,12 @@ const CATEGORIES = ['personal', 'writeup', 'project'];
 
 // Heading ids already used in the post being rendered, so repeats get -2, -3…
 let headingIds = new Map<string, number>();
+const NAMED: Record<string, string> = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ' };
 const decode = (s: string) =>
-  s.replace(/&(amp|lt|gt|quot|#39);/g, (_, e) => ({ amp: '&', lt: '<', gt: '>', quot: '"', '#39': "'" })[e as string]!);
+  s.replace(/&(#x[0-9a-f]+|#\d+|[a-z]+);/gi, (m, e: string) =>
+    e[0] === '#' ? String.fromCodePoint(e[1] === 'x' || e[1] === 'X' ? parseInt(e.slice(2), 16) : +e.slice(1)) : NAMED[e.toLowerCase()] ?? m);
+// Inline tags (incl. highlight.js <span>s) join their text; anything else is a word break
+const INLINE_TAGS = /<\/?(?:span|a|code|em|strong|b|i|del|s|mark|kbd|sub|sup|abbr|small)\b[^>]*>/gi;
 
 const marked = new Marked(
   markedHighlight({
@@ -66,7 +70,8 @@ function posts(): Plugin {
 
       headingIds = new Map();
       const html = marked.parse(content) as string;
-      const text = html.replace(/<[^>]+>/g, ' ').replace(/&[a-z#0-9]+;/gi, ' ').replace(/\s+/g, ' ').trim();
+      // plain text for search: `console.log(x)` stays whole, and `&&` / `List<T>` stay searchable
+      const text = decode(html.replace(INLINE_TAGS, '').replace(/<[^>]+>/g, ' ')).replace(/\s+/g, ' ').trim();
       const post = {
         slug,
         title: String(data.title),

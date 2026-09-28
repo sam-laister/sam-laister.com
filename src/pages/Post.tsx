@@ -14,7 +14,7 @@ export default function PostPage() {
 
   return (
     <article className="page post">
-      <Link to="/blog" className="back">← All posts</Link>
+      <Link to="/blog/" className="back">← All posts</Link>
       <header className="post-head">
         <div className="post-meta">
           <CategoryBadge category={post.category} />
@@ -31,20 +31,20 @@ export default function PostPage() {
       {post.tags.length > 0 && (
         <ul className="pills tags" aria-label="Tags">
           {post.tags.map(t => (
-            <li key={t}><Link to={`/blog?tag=${encodeURIComponent(t)}`}>#{t}</Link></li>
+            <li key={t}><Link to={`/blog/?tag=${encodeURIComponent(t)}`}>#{t}</Link></li>
           ))}
         </ul>
       )}
 
       <nav className="post-nav" aria-label="More posts">
         {older ? (
-          <Link to={`/blog/${older.slug}`}>
+          <Link to={`/blog/${older.slug}/`}>
             <span className="label">← Older</span>
             {older.title}
           </Link>
         ) : <span />}
         {newer && (
-          <Link to={`/blog/${newer.slug}`} className="right">
+          <Link to={`/blog/${newer.slug}/`} className="right">
             <span className="label">Newer →</span>
             {newer.title}
           </Link>
