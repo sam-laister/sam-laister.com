@@ -14,8 +14,14 @@ const types = {
 
 http.createServer((req, res) => {
   const url = new URL(req.url, 'http://localhost');
-  let file = path.join(root, decodeURIComponent(url.pathname));
-  if (!file.startsWith(root)) return res.writeHead(403).end();
+  let file;
+  try {
+    file = path.join(root, decodeURIComponent(url.pathname));
+  } catch {
+    return res.writeHead(400).end(); // malformed escape like /%E0
+  }
+  // must stay inside build/ (a bare startsWith would also allow sibling folders like build-other/)
+  if (file !== root && !file.startsWith(root + path.sep)) return res.writeHead(403).end();
 
   if (fs.existsSync(file) && fs.statSync(file).isDirectory()) {
     if (!url.pathname.endsWith('/')) {

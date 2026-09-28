@@ -37,7 +37,7 @@ export default function Layout() {
         <Outlet />
       </main>
       <footer className="site-footer container">
-        <span>© {new Date().getFullYear()} {profile.name}</span>
+        <span>© {__BUILD_YEAR__} {profile.name}</span>
         <span className="footer-links">
           {profile.links.map(l => (
             <a key={l.href} href={l.href} target="_blank" rel="noreferrer">{l.label}</a>

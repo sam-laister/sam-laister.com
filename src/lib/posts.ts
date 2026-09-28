@@ -19,13 +19,14 @@ export interface Post {
   text: string;
 }
 
-// posts/*.md are turned into Post objects by the markdown plugin in vite.config.ts
-const modules = import.meta.glob<{ default: Post }>('/posts/*.md', { eager: true });
+// posts/*.md are turned into Post objects by the markdown plugin in vite.config.ts.
+// Drafts come through as null in production builds, so they never reach the bundle.
+const modules = import.meta.glob<{ default: Post | null }>('/posts/*.md', { eager: true });
 
 /** Newest first. Drafts only show up in `npm run dev`. */
 export const posts: Post[] = Object.values(modules)
   .map(m => m.default)
-  .filter(p => import.meta.env.DEV || !p.draft)
+  .filter((p): p is Post => p !== null)
   .sort((a, b) => b.date.localeCompare(a.date) || a.title.localeCompare(b.title));
 
 export const getPost = (slug: string) => posts.find(p => p.slug === slug);

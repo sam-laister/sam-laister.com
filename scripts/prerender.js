@@ -10,6 +10,9 @@ const ssrDir = path.join(root, '.ssr');
 const { render, metaFor, posts, SITE_URL, profile } = await import(path.join(ssrDir, 'entry-server.js'));
 
 const template = fs.readFileSync(path.join(out, 'index.html'), 'utf8');
+// GitHub Pages serves each page from a folder and redirects /blog to /blog/,
+// so the trailing-slash form is the real URL of every page.
+const pagePath = url => (url.endsWith('/') ? url : `${url}/`);
 const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
 function page(url, file) {
@@ -20,11 +23,12 @@ function page(url, file) {
     `<meta property="og:title" content="${esc(meta.title)}" />`,
     `<meta property="og:description" content="${esc(meta.description)}" />`,
     `<meta property="og:type" content="${meta.type}" />`,
-    `<meta property="og:url" content="${SITE_URL}${url}" />`,
+    `<meta property="og:url" content="${SITE_URL}${pagePath(url)}" />`,
     `<meta name="twitter:card" content="summary" />`,
-    file !== '404.html' ? `<link rel="canonical" href="${SITE_URL}${url}" />` : '',
+    file !== '404.html' ? `<link rel="canonical" href="${SITE_URL}${pagePath(url)}" />` : '',
   ].filter(Boolean).join('\n    ');
-  const html = template.replace('<!--app-head-->', head).replace('<!--app-html-->', render(url));
+  // function replacers, so `$&`, `$'` etc. in post content are inserted literally
+  const html = template.replace('<!--app-head-->', () => head).replace('<!--app-html-->', () => render(url));
   const dest = path.join(out, file);
   fs.mkdirSync(path.dirname(dest), { recursive: true });
   fs.writeFileSync(dest, html);
@@ -36,7 +40,7 @@ page('/404', '404.html');
 
 fs.writeFileSync(path.join(out, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${routes.map(u => `  <url><loc>${SITE_URL}${u}</loc></url>`).join('\n')}
+${routes.map(u => `  <url><loc>${SITE_URL}${pagePath(u)}</loc></url>`).join('\n')}
 </urlset>
 `);
 
@@ -44,13 +48,13 @@ fs.writeFileSync(path.join(out, 'feed.xml'), `<?xml version="1.0" encoding="UTF-
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>${esc(profile.name)}</title>
-    <link>${SITE_URL}/blog</link>
+    <link>${SITE_URL}/blog/</link>
     <description>Write-ups, projects and personal posts by ${esc(profile.name)}.</description>
     <atom:link href="${SITE_URL}/feed.xml" rel="self" type="application/rss+xml" />
 ${posts.map(p => `    <item>
       <title>${esc(p.title)}</title>
-      <link>${SITE_URL}/blog/${p.slug}</link>
-      <guid>${SITE_URL}/blog/${p.slug}</guid>
+      <link>${SITE_URL}/blog/${p.slug}/</link>
+      <guid>${SITE_URL}/blog/${p.slug}/</guid>
       <pubDate>${new Date(`${p.date}T00:00:00Z`).toUTCString()}</pubDate>
       <category>${p.category}</category>
       <description>${esc(p.summary)}</description>

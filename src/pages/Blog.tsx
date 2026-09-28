@@ -1,20 +1,27 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { useSearchParams } from 'react-router';
+import { useLocation, useSearchParams } from 'react-router';
 import { CATEGORIES, posts, queryTerms, searchPosts, type Category } from '../lib/posts';
 import { useHydrated } from '../lib/useHydrated';
 import PostList from '../components/PostList';
 
 const isCategory = (c: string | null): c is Category => !!c && c in CATEGORIES;
+const FROM_SEARCH = { fromSearch: true };
 
 export default function Blog() {
   const [params, setParams] = useSearchParams();
   const hydrated = useHydrated();
   const input = useRef<HTMLInputElement>(null);
 
+  const location = useLocation();
+
   // The prerendered page is unfiltered; apply ?q= / ?category= / ?tag= once in the browser.
   // The search text lives in state (the URL lags behind fast typing) and is mirrored to ?q=.
+  // Our own URL updates are marked with FROM_SEARCH; any other navigation (e.g. the header's
+  // "Blog" link, which doesn't remount this page) re-reads ?q= so the box never goes stale.
   const [q, setQ] = useState('');
-  useEffect(() => { if (hydrated) setQ(params.get('q') ?? ''); }, [hydrated]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    if (hydrated && !(location.state as { fromSearch?: boolean } | null)?.fromSearch) setQ(params.get('q') ?? '');
+  }, [hydrated, location.key]); // eslint-disable-line react-hooks/exhaustive-deps
   const categoryParam = hydrated ? params.get('category') : null;
   const category = isCategory(categoryParam) ? categoryParam : null;
   const tag = hydrated ? params.get('tag') : null;
@@ -27,7 +34,7 @@ export default function Blog() {
     const next = new URLSearchParams(params);
     if (value) next.set(key, value);
     else next.delete(key);
-    setParams(next, { replace: true, preventScrollReset: true });
+    setParams(next, { replace: true, preventScrollReset: true, state: FROM_SEARCH });
   };
 
   // "/" jumps to search, Escape clears it
@@ -106,7 +113,7 @@ export default function Blog() {
       <p className="result-count" aria-live="polite">
         {filtered ? `${results.length} of ${posts.length} posts` : `${posts.length} ${posts.length === 1 ? 'post' : 'posts'}`}
         {filtered && (
-          <button type="button" className="link-button" onClick={() => { setQ(''); setParams({}, { replace: true, preventScrollReset: true }); }}>
+          <button type="button" className="link-button" onClick={() => { setQ(''); setParams({}, { replace: true, preventScrollReset: true, state: FROM_SEARCH }); }}>
             Clear filters
           </button>
         )}
