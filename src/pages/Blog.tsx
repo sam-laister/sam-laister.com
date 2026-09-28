@@ -72,8 +72,8 @@ export default function Blog() {
   return (
     <div className="page">
       <header className="page-head">
-        <h1>Blog</h1>
-        <p className="lede">Write-ups, projects and the occasional personal post.</p>
+        <h1>Writing</h1>
+        <p className="lede">Project notes, technical write-ups, and the odd personal post.</p>
       </header>
 
       <div className="search" role="search">
@@ -83,13 +83,12 @@ export default function Blog() {
         <input
           ref={input}
           type="search"
-          placeholder="Search posts"
+          placeholder="Search the archive"
           aria-label="Search posts"
           value={q}
           onChange={e => { setQ(e.target.value); update('q', e.target.value); }}
           onKeyDown={e => { if (e.key === 'Escape') { setQ(''); update('q', null); e.currentTarget.blur(); } }}
         />
-        {!q && <kbd aria-hidden="true">/</kbd>}
       </div>
 
       <div className="filters" role="group" aria-label="Filter by category">
@@ -101,10 +100,8 @@ export default function Blog() {
             key={c}
             type="button"
             aria-pressed={category === c}
-            style={{ '--c': CATEGORIES[c].color } as React.CSSProperties}
             onClick={() => update('category', category === c ? null : c)}
           >
-            <span className="badge-dot" aria-hidden="true" />
             {CATEGORIES[c].label} <span className="count">{counts[c] ?? 0}</span>
           </button>
         ))}

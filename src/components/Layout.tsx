@@ -23,13 +23,10 @@ export default function Layout() {
       <a className="skip" href="#main">Skip to content</a>
       <header className="site-header">
         <div className="container header-inner">
-          <Link to="/" className="brand">
-            <span className="brand-mark" aria-hidden="true">sl</span>
-            {profile.name}
-          </Link>
+          <Link to="/" className="brand">{profile.name}</Link>
           <nav aria-label="Main">
             <NavLink to="/" end>About</NavLink>
-            <NavLink to="/blog/">Blog</NavLink>
+            <NavLink to="/blog/">Writing</NavLink>
           </nav>
         </div>
       </header>

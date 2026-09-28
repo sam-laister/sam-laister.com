@@ -39,6 +39,6 @@ Images can go in `public/` (e.g. `public/images/foo.png`) and be used as `![alt]
 ## How it fits together
 
 - `posts/*.md` are turned into data at build time by a small plugin in `vite.config.ts` (frontmatter is validated, markdown is rendered and highlighted). No markdown parsing happens in the browser.
-- `src/data/profile.ts` holds the homepage content: intro, experience, projects, education.
+- The homepage bio is written in `src/pages/Home.tsx`; links and the "Things I’ve made" list are in `src/data/profile.ts`.
 - `scripts/prerender.js` renders every page to its own `index.html` after the build, plus `404.html`, `sitemap.xml` and `feed.xml` (RSS).
 - Search and filters run in the browser and live in the URL (`/blog?q=docker&category=project&tag=go`), so filtered views can be shared.

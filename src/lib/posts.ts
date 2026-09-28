@@ -1,7 +1,7 @@
 export const CATEGORIES = {
-  personal: { label: 'Personal', color: 'var(--yellow)' },
-  writeup: { label: 'Write-up', color: 'var(--blue)' },
-  project: { label: 'Project', color: 'var(--green)' },
+  personal: { label: 'Personal' },
+  writeup: { label: 'Write-up' },
+  project: { label: 'Project' },
 } as const;
 
 export type Category = keyof typeof CATEGORIES;

@@ -14,7 +14,7 @@ export default function PostPage() {
 
   return (
     <article className="page post">
-      <Link to="/blog/" className="back">← All posts</Link>
+      <Link to="/blog/" className="back">← Writing</Link>
       <header className="post-head">
         <div className="post-meta">
           <CategoryBadge category={post.category} />
@@ -29,7 +29,7 @@ export default function PostPage() {
       <div className="prose" dangerouslySetInnerHTML={{ __html: post.html }} />
 
       {post.tags.length > 0 && (
-        <ul className="pills tags" aria-label="Tags">
+        <ul className="tags" aria-label="Tags">
           {post.tags.map(t => (
             <li key={t}><Link to={`/blog/?tag=${encodeURIComponent(t)}`}>#{t}</Link></li>
           ))}

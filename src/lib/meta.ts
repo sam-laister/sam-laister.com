@@ -11,12 +11,12 @@ export interface Meta {
 export function metaFor(pathname: string): Meta {
   const path = pathname.replace(/\/+$/, '') || '/';
   if (path === '/') {
-    return { title: `${profile.name} · ${profile.role}`, description: profile.intro, type: 'website' };
+    return { title: profile.name, description: profile.description, type: 'website' };
   }
   if (path === '/blog') {
     return {
-      title: `Blog · ${profile.name}`,
-      description: 'Write-ups, projects and personal posts by Sam Laister.',
+      title: `Writing · ${profile.name}`,
+      description: 'Project notes, technical write-ups, and the odd personal post by Sam Laister.',
       type: 'website',
     };
   }
